@@ -1,21 +1,27 @@
-import axios from 'axios'
-import authHeader from '../headers'
+import DrugstoreService from '../services'
 
-const url = 'http://localhost:3000/shelter/v1'
+export default {
+  // Set Drugstore
+  ActionFindDrugstore({ commit }) {
+    return DrugstoreService.getDrugstore()
+      .then(res => {
+        commit('setDrugs', res)
+        return Promise.resolve(res)
+      })
+      .catch(err => {
+        return Promise.reject(err)
+      })
+  },
 
-export const ActionFindDrugstore = ({ commit }) => {
-  axios.get(`${url}/drugstore`, {
-    headers: authHeader()
-  }).then((res) => {
-    commit('setDrugs', res.data.drugs)
-  })
-}
-
-export const ActionFindDrug = async ({ commit }, id) => {
-  await axios.get(`${url}/drugstore/${id}`, {
-    headers: authHeader()
-  })
-  .then((res) => {
-    commit('setDrug', res.data.drug)
-  })
+  // Set single drug
+  ActionFindDrug({ commit }, id) {
+    return DrugstoreService.getDrug(id)
+      .then(res => {
+        commit('setDrug', res)
+        return Promise.resolve(res)
+      })
+      .catch(err => {
+        return Promise.reject(err)
+      })
+  }
 }

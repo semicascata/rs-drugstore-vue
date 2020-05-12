@@ -18,21 +18,6 @@
     </div>
   </div>
 
-  <!--
-  <a v-if="isLogged" class="navbar-brand">
-    <img :src="loggedUser.icon" class="icon">
-    {{ user }}
-  </a>
-
-  <router-link v-if="!isLogged" to='/login' class="navbar-brand">
-    Login <i class="fas fa-sign-in-alt"></i>
-  </router-link>
-
-  <a v-if="isLogged" type="button" @click.prevent="logoutHand()" class="navbar-brand">
-    Logout <i class="fas fa-sign-out-alt"></i>
-  </a>
--->
-
   <!-- Toggle bar -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -43,25 +28,16 @@
 
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
-      <!--
-      <li class="nav-item">
-        <a v-if="isLogged" class="nav-link">
-          <img :src="loggedUser.icon" class="icon">
-          {{ user }}
-        </a>
-      </li>
-      -->
-
       <li class="nav-item">
         <router-link v-if="!isLogged" to='/login' class="nav-link">
           <i class="fas fa-sign-in-alt"></i> Login
         </router-link>
       </li>
 
-      <li class="nav-item">
-        <a v-if="isLogged" type="button" class="nav-link">
+      <li class="nav-item active">
+        <router-link v-if="isLogged" to='/account' type="button" class="nav-link">
           <i class="fas fa-user"></i> Account
-        </a>
+        </router-link>
       </li>
 
       <li class="nav-item">
@@ -69,21 +45,6 @@
           <i class="fas fa-sign-out-alt"></i> Logout
         </a>
       </li>
-
-
-      <!--
-      <li class="nav-item active">
-        <router-link class="nav-link" to='/'>Home<span class="sr-only">(current)</span></router-link>
-      </li>
-
-      <li class="nav-item">
-        <router-link class="nav-link" to='/drugstore'>Drugstore</router-link>
-      </li>
-
-      <li class="nav-item">
-        <router-link class="nav-link" to='/contact'>Contact</router-link>
-      </li>
-      -->
     </ul>
 
   </div>

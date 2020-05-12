@@ -4,7 +4,7 @@
   <div class="titleDrugs">
     <h2>Drugstore</h2>
     <p>
-      Mi eget mauris pharetra et ultrices. Donec adipiscing tristique risus nec feugiat in fermentum posuere urna.
+      Birdies, birdies... gather ye here, round the marble nest...
     </p>
   </div>
 
@@ -27,12 +27,7 @@
 </template>
 
 <script>
-import {
-  mapActions,
-  mapState
-} from 'vuex'
-
-// import Secure from '../../../modules/auth/views/Secure'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Drugstore',
@@ -40,12 +35,23 @@ export default {
     if(!this.drugs) {
       alert('Wait a minute, who are you??')
     }
-    
+
     this.ActionFindDrugstore()
   },
   computed: {
     // Data 'drugs'
-    ...mapState('drugstore', ['drugs'])
+    ...mapState('drugstore', ['drugs', 'initState']),
+
+    // Check if the user is logged in
+    checkLoggedUser() {
+      let userStats = this.initState.status.loggedIn
+      return userStats
+    }
+  },
+  created() {
+    if(!this.checkLoggedUser) {
+      this.$router.push('/login')
+    }
   },
   methods: {
     // Request to drugstore

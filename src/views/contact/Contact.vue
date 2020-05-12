@@ -40,7 +40,7 @@ export default {
 
 <style lang='scss' scoped>
 .contact {
-  width: 900px;
+  width: auto;
   margin: 20px auto 100px;
   text-align: center;
   color: #363636;

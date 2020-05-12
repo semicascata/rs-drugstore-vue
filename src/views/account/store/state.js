@@ -1,4 +1,4 @@
-// Data
+// Get the token from Local Storage and set it to the user
 const user = localStorage.getItem('user')
 
 const initState = user
@@ -9,6 +9,5 @@ const initState = user
 
 export default {
   initState,
-  drugs: [],
-  drug: []
+  loggedUser: {},
 }

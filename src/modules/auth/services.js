@@ -1,12 +1,10 @@
 import axios from 'axios'
-
-// API URL
-const URL = 'http://localhost:3000/shelter/v1/auth'
+import URL from '../../_helpers/url'
 
 class AuthService {
   // Login Handler
   login(user) {
-    return axios.post(`${URL}/login`, {
+    return axios.post(`${URL}/auth/login`, {
       // Payload for authentication POST requests
       username: user.username,
       password: user.password
@@ -25,7 +23,7 @@ class AuthService {
 
   // Register Handler
   register(user) {
-    return axios.post(`${URL}/register`, {
+    return axios.post(`${URL}/auth/register`, {
       username: user.username,
       email: user.email,
       password: user.password,

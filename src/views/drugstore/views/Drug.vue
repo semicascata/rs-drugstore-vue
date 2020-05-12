@@ -4,7 +4,7 @@
   <div class="titleDrugs">
     <h2>Drugstore</h2>
     <p>
-      Mi eget mauris pharetra et ultrices. Donec adipiscing tristique risus nec feugiat in fermentum posuere urna.
+      Birdies, birdies... gather ye here, round the marble nest...
     </p>
   </div>
 
@@ -33,6 +33,12 @@
       </div>
     </div>
 
+  </div>
+
+  <div class="buttonContainer">
+    <router-link to="/drugstore" type="button" class="btn">
+      <i class="fas fa-caret-left"></i> Back
+    </router-link>
   </div>
 </div>
 </template>
@@ -106,5 +112,14 @@ export default {
         text-align: justify;
         font-size: 1rem;
     }
+}
+
+.buttonContainer {
+  margin: 60px auto 30px;
+  text-align: center;
+
+  .btn {
+    font-family: 'Bree Serif', serif;
+  }
 }
 </style>
