@@ -15,12 +15,27 @@ class UsersService {
 
   // Get single drug from Drugstore
   getUser(id) {
-    return axios.get(`${URL}/user/${id}`, {
+    return axios.get(`${URL}/users/${id}`, {
       headers: authHeader()
     }).then(res => {
       console.log(res.data.success)
       return res.data.user
     })
+  }
+
+  // Get User
+  getUserAuth() {
+    return axios.get(`${URL}/auth/user`, {
+        headers: authHeader()
+      })
+      .then(res => {
+        if(res.data) {
+          // Get the data from response and console log it
+          console.log(res.data)
+        }
+        // Send the info to the 'Actions'
+        return res.data
+      })
   }
 }
 

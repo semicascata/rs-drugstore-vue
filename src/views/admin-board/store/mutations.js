@@ -9,5 +9,10 @@ export default {
   // Get single drug from drugstore
   setUser (state, data) {
     state.user = data
+  },
+
+  // Set logged user info
+  setUserAuth(state, user) {
+    state.loggedUser = user
   }
 }

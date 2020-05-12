@@ -9,6 +9,7 @@ const initState = user
 
 export default {
   initState,
+  loggedUser: {},
   users: [],
   user: []
 }

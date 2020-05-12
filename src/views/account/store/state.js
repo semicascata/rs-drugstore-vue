@@ -9,5 +9,5 @@ const initState = user
 
 export default {
   initState,
-  loggedUser: {},
+  loggedUser: {}
 }

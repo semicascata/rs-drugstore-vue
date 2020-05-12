@@ -23,5 +23,17 @@ export default {
       .catch(err => {
         return Promise.reject(err)
       })
+  },
+
+  // Get logged user info
+  ActionGetUser({ commit }) {
+    return UsersService.getUserAuth()
+      .then(data => {
+      commit('setUserAuth', data)
+      return Promise.resolve(data)
+    })
+    .catch(err => {
+      return Promise.reject(err)
+    })
   }
 }

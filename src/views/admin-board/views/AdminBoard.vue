@@ -4,12 +4,14 @@
   <h3>Users Control:</h3>
 
   <div class="row">
-    <ul :key='user.id' v-for='user in users' class="list-group">
-      <button to="/:id" class="list-group-item active">{{ user.username }}</button>
-      <li class="list-group-item"><b>Email</b>: {{ user.email }}</li>
-      <li class="list-group-item"><b>Role</b>: {{ user.role }}</li>
-      <li class="list-group-item"><b>URL Icon</b>: {{ user.icon }}</li>
-      <li class="list-group-item"><b>Created</b>: {{ user.createdAt }}</li>
+    <ul class="list-group">
+      <li type="button"
+      @click.prevent="singleUser(user._id)"
+      :key='user.id'
+      v-for='user in users'
+      class="list-group-item">
+        {{ user.username }}
+      </li>
     </ul>
   </div>
 </div>
@@ -28,20 +30,36 @@ export default {
     this.ActionFindUsers()
   },
   computed: {
-    ...mapState('adminBoard', ['users', 'initState']),
+    ...mapState('adminBoard', ['users', 'initState', 'loggedUser']),
 
     checkLoggedUser() {
       let userStats = this.initState.status.loggedIn
       return userStats
+    },
+
+    isAdmin() {
+      let userAdmin = this.loggedUser.role
+      return userAdmin
     }
   },
-  created() {
-    if(!this.checkLoggedUser) {
+  async created() {
+    if(this.checkLoggedUser) {
+
+      await this.ActionGetUser()
+
+      if(this.isAdmin !== 'admin') {
+
+        this.$router.push('/account')
+        console.log(this.isAdmin)
+      }
+
+    } else if(!this.checkedLoggedUser) {
       this.$router.push('/login')
     }
+
   },
   methods: {
-    ...mapActions('adminBoard', ['ActionFindUsers']),
+    ...mapActions('adminBoard', ['ActionFindUsers', 'ActionGetUser']),
 
     singleUser(id) {
       this.$router.push(`/users/${id}`)
