@@ -4,9 +4,13 @@
 
     <div class="imgContainer">
       <img :src="loggedUser.icon" alt="userIcon">
+      <div v-if="loggedUser.role === 'admin'" class="adminUtilities">
+        <h3>Admin Board</h3>
+        <router-link to="/users" class="btn btn-sm btn-danger" type="button" name="button">Users</router-link>
+      </div>
     </div>
 
-    <div class="cardUser">
+    <div class="card cardUser">
       <div class="cardBody">
         <h5 class="cardTitle">{{ user }}</h5>
         <h6 class="cardSubtitle">Role: {{ loggedUser.role }}</h6>
@@ -16,6 +20,7 @@
           <h6 class="cardSubtitle">Token:</h6>
           <h6 class="token">"{{ initState.user }}"</h6>
         </div>
+        <hr>
         <p v-if="loggedUser.role === 'admin'" class="cardText">
           Orderlies — the volunteer medical assistants — use these costumes borrowed from the local theatre as protective cloaks. This is the traditional costume of the Reaper, an allegory of Death. The mask of Muu Shubuun, "The Wicked Bird". Part of the Reaper costume from the local theatre. It doesn't have eyeholes: the mask is mounted above an actor's head, who peeks through a hole in the cloak.
         </p>
@@ -81,7 +86,7 @@ export default {
 <style lang="scss" scoped>
 .account {
   margin: 30px auto 60px;
-  padding: 50px;
+  padding: 30px;
 }
 
 .imgContainer {
@@ -91,14 +96,17 @@ export default {
   img {
     width: 400px;
     border-radius: 50px;
+    box-shadow: 15px 15px 30px #363636;
   }
 }
 
 .cardUser {
   width: 500px;
   height: auto;
+  padding: 20px;
   margin: 10px auto;
   border-radius: 30px;
+  box-shadow: 15px 15px 30px #363636;
 }
 
 .cardTitle {
@@ -120,5 +128,19 @@ export default {
   font-family: 'Bree Serif', serif;
   font-size: 0.8rem;
   word-wrap: break-word;
+}
+
+.adminUtilities {
+  margin: 15px auto 40px;
+  padding: 20px;
+  text-align: center;
+
+  h3 {
+    font-family: 'Bree Serif', serif;
+  }
+
+  .btn {
+    font-family: 'Bree Serif', serif;
+  }
 }
 </style>

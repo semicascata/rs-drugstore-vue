@@ -1,6 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-light">
 
+  <!-- Dropdown -->
   <div class="dropdown show">
     <a v-if="isLogged" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img :src="loggedUser.icon" class="icon">

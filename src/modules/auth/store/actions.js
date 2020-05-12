@@ -9,7 +9,7 @@ export default {
       return Promise.resolve(user)
     })
     .catch(err => {
-      commit('loginFailure')
+      commit('loginFailure', err)
       return Promise.reject(err)
     })
   },
@@ -22,7 +22,7 @@ export default {
       return Promise.resolve(res.data)
     })
     .catch(err => {
-      commit('registerFailure')
+      commit('registerFailure', err)
       return Promise.reject(err)
     })
   }

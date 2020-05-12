@@ -2,8 +2,7 @@ export default [
   {
     path: '/drugstore',
     name: 'drugstore',
-    component: () => import(/* webpackChunkName: "drugstore" */ './views/Drugstore'),
-    props: true
+    component: () => import(/* webpackChunkName: "drugstore" */ './views/Drugstore')
   },
   {
     path: '/drugstore/:id',

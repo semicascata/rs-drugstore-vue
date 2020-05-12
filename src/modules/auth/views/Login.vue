@@ -1,6 +1,10 @@
 <template>
 <div class="card">
   <form>
+    <div v-if="err" class="alert alert-danger" role="alert">
+      {{ err }}
+    </div>
+
     <div class="form-group">
       <label>Username</label>
       <input class="form-control" placeholder="User" v-model="user.username">
@@ -12,7 +16,7 @@
     </div>
 
     <div class="text-center">
-      <button @click.prevent="login()" type="submit" class="btn btn-danger btn-block">
+      <button @click.prevent="login()" type="submit" class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalAuth">
         Submit
       </button>
       <div class="form-text text-muted" name="medium">New user? <router-link to='/register'>Sign Up</router-link>!</div>
@@ -22,7 +26,10 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import {
+  mapActions,
+  mapState
+} from 'vuex'
 
 export default {
   name: 'Login',
@@ -31,11 +38,12 @@ export default {
       user: {
         username: '',
         password: ''
-      }
+      },
+      err: ''
     }
   },
   computed: {
-    ...mapState('auth', ['initState']),
+    ...mapState('auth', ['initState', 'validateErr']),
 
     // Check if user is already authenticated
     loggedIn() {
@@ -54,14 +62,14 @@ export default {
     // Login Handler
     login() {
       this.ActionLogin(this.user)
-      .then(() => {
-        alert('User logged in!')
-        return window.location.href = '/'
-      })
-      .catch(err => {
-        this.$router.push('/login')
-        alert(err.message)
-      })
+        .then(() => {
+          return window.location.href = '/drugstore'
+        })
+        .catch(() => {
+          this.$router.push('/login')
+          this.err = 'Authentication failed. Please, try again'
+          console.log(this.validateErr)
+        })
     }
   }
 
@@ -70,9 +78,9 @@ export default {
 
 <style lang='scss'>
 .card {
-  margin: 60px auto;
-  width: 350px;
-  box-shadow: 15px 15px 30px #363636;
+    margin: 60px auto;
+    width: 350px;
+    box-shadow: 15px 15px 30px #363636;
 }
 
 form {
@@ -88,7 +96,12 @@ form {
     }
 
     medium {
-      font-family: 'Bree Serif', serif;
+        font-family: 'Bree Serif', serif;
     }
+}
+
+.alert {
+  font-family: 'Bree Serif', serif;
+  text-align: center;
 }
 </style>

@@ -1,8 +1,5 @@
-// Get the token from Local Storage and set it to the user
-// const user = JSON.parse(localStorage.getItem('user'))
-
+// Data
 const user = localStorage.getItem('user')
-
 
 const initState = user
   // IF: If the user is already logged in, set it to the 'user' state
@@ -12,5 +9,6 @@ const initState = user
 
 export default {
   initState,
-  validateErr: []
+  users: [],
+  user: []
 }
