@@ -35,5 +35,18 @@ export default {
     .catch(err => {
       return Promise.reject(err)
     })
+  },
+
+  // Delete user
+  ActionDeleteUser({ commit }, id) {
+    console.log(id)
+    return UsersService.deleteUser(id)
+    .then(res => {
+      commit('removeUser', id)
+      return Promise.resolve(res)
+    })
+    .catch(err => {
+      return Promise.reject(err)
+    })
   }
 }

@@ -1,8 +1,8 @@
 <template>
 <div class="card">
   <form>
-    <div v-if="err" class="alert alert-danger" role="alert">
-      {{ err }}
+    <div v-if="validation" class="alert alert-danger" role="alert">
+      {{ validation }}
     </div>
 
     <div class="form-group">
@@ -39,11 +39,11 @@ export default {
         username: '',
         password: ''
       },
-      err: ''
+      validation: ''
     }
   },
   computed: {
-    ...mapState('auth', ['initState', 'validateErr']),
+    ...mapState('auth', ['initState']),
 
     // Check if user is already authenticated
     loggedIn() {
@@ -67,8 +67,7 @@ export default {
         })
         .catch(() => {
           this.$router.push('/login')
-          this.err = 'Authentication failed. Please, try again'
-          console.log(this.validateErr)
+          this.validation = 'Authentication failed, try again Flor'
         })
     }
   }

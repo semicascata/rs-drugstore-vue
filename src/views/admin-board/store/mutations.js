@@ -14,5 +14,9 @@ export default {
   // Set logged user info
   setUserAuth(state, user) {
     state.loggedUser = user
+  },
+
+  removeUser(state, id) {
+    state.user = id
   }
 }

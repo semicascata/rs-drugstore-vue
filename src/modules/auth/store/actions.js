@@ -10,6 +10,7 @@ export default {
     })
     .catch(err => {
       commit('loginFailure', err)
+      console.log(err)
       return Promise.reject(err)
     })
   },

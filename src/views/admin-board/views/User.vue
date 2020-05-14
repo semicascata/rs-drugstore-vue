@@ -14,7 +14,8 @@
         <li class="list-group-item"><b>Role</b>: {{ user.role }}</li>
         <li class="list-group-item"><b>URL Icon</b>: {{ user.icon }}</li>
         <li class="list-group-item"><b>Created</b>: {{ user.createdAt }}</li>
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <li class="list-group-item"><b>ID</b>: {{ user._id }}</li>
+        <button @click.prevent="deleteUser(user._id)" type="submit" class="btn btn-danger">Delete</button>
       </ul>
     </div>
 
@@ -39,7 +40,19 @@ export default {
     ...mapState('adminBoard', ['user'])
   },
   methods: {
-    ...mapActions('adminBoard', ['ActionFindUser'])
+    ...mapActions('adminBoard', ['ActionFindUser', 'ActionDeleteUser']),
+
+    deleteUser(id) {
+      this.ActionDeleteUser(id)
+      .then(() => {
+        alert('User deleted')
+        this.$router.push('/users')
+      })
+      .catch((err) => {
+        alert(err)
+        console.log(err)
+      })
+    }
   }
 }
 </script>

@@ -31,11 +31,22 @@ class UsersService {
       .then(res => {
         if(res.data) {
           // Get the data from response and console log it
-          console.log(res.data)
+          console.log(res.data.role)
         }
         // Send the info to the 'Actions'
         return res.data
       })
+  }
+
+  // Delete User
+  deleteUser(id) {
+    console.log(id)
+    return axios.delete(`${URL}/users/${id}`, {
+      headers: authHeader()
+    })
+    .then(res => {
+      console.log(res.data.message)
+    })
   }
 }
 

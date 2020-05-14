@@ -1,6 +1,9 @@
 <template>
 <div class="card">
   <form>
+    <div v-if="validation" class="alert alert-danger" role="alert">
+      {{ validation }}
+    </div>
     <div class="form-group">
       <label>Username</label>
       <input class="form-control" placeholder="myuser" v-model="user.username">
@@ -52,7 +55,8 @@ export default {
         password: '',
         password2: '',
         role: undefined
-      }
+      },
+      validation: ''
     }
   },
   computed: {
@@ -75,14 +79,12 @@ export default {
     // Register Handler
     register() {
       this.ActionRegister(this.user)
-        .then((res) => {
-          let resUser = res.username
-          alert(`User "${resUser}" registered!`)
+        .then(() => {
           this.$router.push('/login')
         })
-        .catch(err => {
+        .catch(() => {
           this.$router.push('/register')
-          alert(err.message)
+          this.validation = 'Failed to register, try again Flor'
         })
     }
   }
@@ -107,5 +109,10 @@ form {
     .btn {
         font-family: 'Bree Serif', serif;
     }
+}
+
+.alert {
+  font-family: 'Bree Serif', serif;
+  text-align: center;
 }
 </style>
