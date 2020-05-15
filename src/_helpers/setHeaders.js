@@ -1,7 +1,7 @@
 export default function authHeader() {
     // Get token/user from Local Storage
     let user = localStorage.getItem('user')
-
+  
     if(user) {
       // console.log(user)
       return {

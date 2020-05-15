@@ -9,6 +9,7 @@ export default {
       return Promise.resolve(data)
     })
     .catch(err => {
+      console.log('There is a error!')
       return Promise.reject(err)
     })
   }

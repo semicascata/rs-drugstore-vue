@@ -2,17 +2,27 @@ import AuthService from '../services'
 
 export default {
   // Login Action
+  // ActionLogin({ commit }, user) {
+  //   return AuthService.login(user)
+  //   .then(user => {
+  //     commit('loginSuccess', user)
+  //     return Promise.resolve(user)
+  //   })
+  //   .catch(err => {
+  //     commit('loginFailure', err)
+  //     console.log(err)
+  //     return Promise.reject(err)
+  //   })
+  // },
   ActionLogin({ commit }, user) {
-    return AuthService.login(user)
-    .then(user => {
-      commit('loginSuccess', user)
-      return Promise.resolve(user)
-    })
-    .catch(err => {
+    try {
+      return AuthService.login(user)
+      .then(user => {
+        commit('loginSuccess', user)
+      })
+    } catch(err) {
       commit('loginFailure', err)
-      console.log(err)
-      return Promise.reject(err)
-    })
+    }
   },
 
   // Register Action

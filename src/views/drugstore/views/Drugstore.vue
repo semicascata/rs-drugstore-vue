@@ -1,42 +1,69 @@
 <template>
-<div class="container drugs">
+<div>
 
-  <div class="titleDrugs">
-    <h2>Drugstore</h2>
-    <p>
-      Birdies, birdies... gather ye here, round the marble nest...
-    </p>
-  </div>
+  <Loading v-if="loading" />
 
+  <div v-else class="container drugs">
 
-  <div class="row justify-content-md-center">
-
-    <div :key='drug.id' v-for='drug in drugs' class="card">
-      <div class="card-body">
-        <div class="imgContainer">
-          <img :src="drug.imgUrl" alt="Drug Img">
-        </div>
-        <h5 class="card-title">{{ drug.name }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ drug.category }}</h6>
-        <button @click.prevent="singleDrug(drug._id)" type="button" class="btn btn-sm btn-danger">More</button>
-      </div>
+    <div class="titleDrugs">
+      <h2>Drugstore</h2>
+      <p>
+        Birdies, birdies... gather ye here, round the marble nest...
+      </p>
     </div>
 
+
+    <div class="row justify-content-md-center">
+
+      <div :key='drug.id' v-for='drug in drugs' class="card">
+        <div class="card-body">
+          <div class="imgContainer">
+            <img :src="drug.imgUrl" alt="Drug Img">
+          </div>
+          <h5 class="card-title">{{ drug.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ drug.category }}</h6>
+          <button @click.prevent="singleDrug(drug._id)" type="button" class="btn btn-sm btn-danger">More</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import {
+  mapActions,
+  mapState
+} from 'vuex'
+import Loading from '../../../components/Loading'
 
 export default {
   name: 'Drugstore',
+  components: {
+    Loading
+  },
+  data() {
+    return {
+      loading: true
+    }
+  },
   mounted() {
-    if(!this.drugs) {
+    setTimeout(() => {
+      this.ActionFindDrugstore()
+      this.loading = false
+    }, 1000)
+
+
+    if (!this.drugs) {
       alert('Wait a minute, who are you??')
     }
 
-    this.ActionFindDrugstore()
+    // try {
+    //   this.loading = false
+    // } catch {
+    //   this.loadin = true
+    // }
   },
   computed: {
     // Data 'drugs'
@@ -49,7 +76,7 @@ export default {
     }
   },
   created() {
-    if(!this.checkLoggedUser) {
+    if (!this.checkLoggedUser) {
       this.$router.push('/login')
     }
   },

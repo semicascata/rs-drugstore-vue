@@ -15,7 +15,7 @@
         <li class="list-group-item"><b>URL Icon</b>: {{ user.icon }}</li>
         <li class="list-group-item"><b>Created</b>: {{ user.createdAt }}</li>
         <li class="list-group-item"><b>ID</b>: {{ user._id }}</li>
-        <button @click.prevent="deleteUser(user._id)" type="submit" class="btn btn-danger">Delete</button>
+        <button v-if="user.role !== 'admin'" @click.prevent="deleteUser(user._id)" type="submit" class="btn btn-danger">Delete</button>
       </ul>
     </div>
 

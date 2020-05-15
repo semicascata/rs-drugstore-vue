@@ -4,6 +4,10 @@ import router from './router/index'
 import store from './store/index'
 import './assets/scss/styles.scss'
 
+// import interceptorSetup from './http/interceptors'
+
+// interceptorSetup()
+
 Vue.config.productionTip = false
 
 new Vue({
