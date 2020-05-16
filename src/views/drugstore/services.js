@@ -8,7 +8,7 @@ class DrugstoreService {
     return axios.get(`${URL}/drugstore`, {
       headers: authHeader()
     }).then(res => {
-      console.log(res.data.success)
+      // console.log(res.data.success)
       return res.data.drugs
     })
   }
@@ -18,7 +18,7 @@ class DrugstoreService {
     return axios.get(`${URL}/drugstore/${id}`, {
       headers: authHeader()
     }).then(res => {
-      console.log(res.data.success)
+      // console.log(res.data.success)
       return res.data.drug
     })
   }

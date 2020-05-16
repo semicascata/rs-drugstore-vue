@@ -8,7 +8,7 @@ class UsersService {
     return axios.get(`${URL}/users`, {
       headers: authHeader()
     }).then(res => {
-      console.log(res.data.success)
+      // console.log(res.data.success)
       return res.data.users
     })
   }
@@ -18,7 +18,7 @@ class UsersService {
     return axios.get(`${URL}/users/${id}`, {
       headers: authHeader()
     }).then(res => {
-      console.log(res.data.success)
+      // console.log(res.data.success)
       return res.data.user
     })
   }
@@ -31,7 +31,7 @@ class UsersService {
       .then(res => {
         if(res.data) {
           // Get the data from response and console log it
-          console.log(res.data.role)
+          // console.log(res.data.role)
         }
         // Send the info to the 'Actions'
         return res.data
@@ -44,8 +44,8 @@ class UsersService {
     return axios.delete(`${URL}/users/${id}`, {
       headers: authHeader()
     })
-    .then(res => {
-      console.log(res.data.message)
+    .then(() => {
+      // console.log(res.data.message)
     })
   }
 }
