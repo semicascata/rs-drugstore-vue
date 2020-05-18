@@ -9,8 +9,23 @@ class IntercepServices {
 
     // GET call to the Logout end-point
     return axios.get(`${URL}/auth/logout`)
-    .then((res) => {
-      console.log(res)
+    .then(res => {
+      // console.log(res)
+      return res
+    })
+  }
+
+  // Refresh Token
+  tokenRef() {
+    const token = localStorage.getItem('userRefresh')
+
+    // Post request to the Refresh Token end-point
+    return axios.post(`${URL}/auth/token`, {
+      refreshToken: token
+    })
+    .then(res => {
+      // console.log(res)
+      return res
     })
   }
 }

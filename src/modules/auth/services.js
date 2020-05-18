@@ -15,7 +15,15 @@ class AuthService {
         // Set the token we got on 'res' to the Local Storage on browser
         const token = res.data.token
         localStorage.setItem('user', token)
+
       }
+
+      // Got refresh Token
+      if(res.data.refreshToken) {
+        const refreshToken = res.data.refreshToken
+        localStorage.setItem('userRefresh', refreshToken)
+      }
+
       // Return the response
       return res.user
     })
