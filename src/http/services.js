@@ -6,9 +6,12 @@ class IntercepServices {
   logout() {
     // Remove data from Local Storage
     localStorage.removeItem('user')
+    const userRefresh = localStorage.getItem('userRefresh')
 
     // GET call to the Logout end-point
-    return axios.get(`${URL}/auth/logout`)
+    return axios.get(`${URL}/auth/logout`, {
+      token: userRefresh
+    })
     .then(res => {
       // console.log(res)
       return res

@@ -7,6 +7,7 @@ class AuthService {
   logout() {
     // Remove data from Local Storage
     localStorage.removeItem('user')
+    localStorage.removeItem('userRefresh')
 
     // GET call to the Logout end-point
     return axios.get(`${URL}/auth/logout`)

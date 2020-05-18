@@ -15,13 +15,12 @@ export default function interceptorSetup() {
     return req
 
   }, err => {
-    console.log(err)
     return Promise.reject(err)
   })
 
   // Response
   axios.interceptors.response.use(res => {
-    console.log(`Endpoint: ${res.config.url}`)
+    // console.log(`Endpoint: ${res.config.url}`)
 
     // Edit request config
     return res
@@ -32,43 +31,36 @@ export default function interceptorSetup() {
 
     // 401 Status code AND Refresh token URL?
     if (err.response.status === 401 && originalReq.url === refreshUrl) {
-      return Promise.reject(err)
+
+      // Logout user
+      IntercepServices.logout()
+      .then(() => {
+        // localStorage.removeItem('userRefresh')
+
+        // Reload page
+        router.go()
+      })
     }
 
     // 401 Status code AND Is it failed again?
     if (err.response.status === 401 && !originalReq._retry) {
       console.log('Refresh token')
 
-      // originalReq._retry = true
+      try {
+        // Refresh Token Exchange
+        IntercepServices.tokenRef()
+          .then(res => {
+            //Removing expired token
+            localStorage.removeItem('user')
 
-      // Refresh Token Exchange
-      IntercepServices.tokenRef()
-        .then(res => {
+            // Get new token response and setting it
+            const newToken = res.data.token
+            localStorage.setItem('user', newToken)
+          })
 
-          //Removing expired token
-          localStorage.removeItem('user')
-
-          // Get new token response and setting it
-          const newToken = res.data.token
-          localStorage.setItem('user', newToken)
-        })
-        .catch(err => {
-
-          // If 401 Status code
-          if(err.response.status === 401) {
-            console.log('Logging user out')
-
-            IntercepServices.logout()
-            .then(() => {
-              // Reload page
-              router.go()
-            })
-          }
-          return Promise.reject(err)
-        })
-
-      // Handle err
-      return Promise.reject(err)
+      } catch (err) {
+        return Promise.reject(err)
+      }
     }
   })
 }
