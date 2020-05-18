@@ -7,21 +7,18 @@ export default {
   },
 
   // If login NOK
-  loginFailure(state, err) {
+  loginFailure(state) {
     state.initState.status.loggedIn = false
     state.user = null
-    state.validateErr = err
   },
 
   // If register OK
-  registerSuccess(state, err) {
+  registerSuccess(state) {
     state.initState.status.loggedIn = false
-    state.validateErr = err
   },
 
   // If register NOK
-  registerFailure(state, err) {
+  registerFailure(state) {
     state.initState.status.loggedIn = false
-    state.validateErr = err
   }
 }

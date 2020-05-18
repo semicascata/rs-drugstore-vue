@@ -11,6 +11,5 @@ const initState = user
   : { status: { loggedIn: false }, user: null }
 
 export default {
-  initState,
-  validateErr: []
+  initState
 }

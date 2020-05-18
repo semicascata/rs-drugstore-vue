@@ -1,4 +1,4 @@
-# r_shelter-vue
+# Ravel's Shelter - Drugstore
 
 ## Project setup
 ```

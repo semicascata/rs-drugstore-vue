@@ -34,7 +34,7 @@
     </div>
 
     <div class="text-center">
-      <button @click="register()" type="submit" class="btn btn-danger btn-block">
+      <button @click.prevent="register()" type="submit" class="btn btn-danger btn-block">
         Register
       </button>
     </div>

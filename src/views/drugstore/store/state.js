@@ -9,6 +9,8 @@ const initState = user
 
 export default {
   initState,
+  loggedUser: {},
   drugs: [],
-  drug: []
+  drug: [],
+  newDrug: false
 }

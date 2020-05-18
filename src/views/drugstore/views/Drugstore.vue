@@ -12,6 +12,10 @@
       </p>
     </div>
 
+    <div v-if="userRole === 'admin' || 'publisher'" class="btnNew">
+      <router-link type="button" to="/addmedicine" class="btn btn-danger">Add new medicine</router-link>
+    </div>
+
 
     <div class="row justify-content-md-center">
 
@@ -45,7 +49,8 @@ export default {
   },
   data() {
     return {
-      loading: true
+      loading: true,
+      userRole: ''
     }
   },
   mounted() {
@@ -59,15 +64,10 @@ export default {
       alert('Wait a minute, who are you??')
     }
 
-    // try {
-    //   this.loading = false
-    // } catch {
-    //   this.loadin = true
-    // }
   },
   computed: {
     // Data 'drugs'
-    ...mapState('drugstore', ['drugs', 'initState']),
+    ...mapState('drugstore', ['drugs', 'initState', 'loggedUser']),
 
     // Check if the user is logged in
     checkLoggedUser() {
@@ -75,14 +75,22 @@ export default {
       return userStats
     }
   },
-  created() {
-    if (!this.checkLoggedUser) {
+  async created() {
+    if (this.checkLoggedUser === true) {
+      // Got user info, if it is logged in
+      await this.ActionGetUser()
+
+      // Get username
+      this.userRole = this.loggedUser.role
+
+    } else if (this.checkLoggedUser === false) {
+
       this.$router.push('/login')
     }
   },
   methods: {
     // Request to drugstore
-    ...mapActions('drugstore', ['ActionFindDrugstore']),
+    ...mapActions('drugstore', ['ActionFindDrugstore', 'ActionGetUser']),
 
     // Redirect to single drug description
     singleDrug(id) {
@@ -119,6 +127,12 @@ export default {
         width: 140px;
         padding: 5px;
     }
+}
+
+.btnNew {
+  margin: 10px auto;
+  text-align: center;
+  font-family: 'Bree Serif', serif;
 }
 
 .card {

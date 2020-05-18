@@ -22,6 +22,33 @@ class DrugstoreService {
       return res.data.drug
     })
   }
+
+  // Get User
+  getUser() {
+    return axios.get(`${URL}/auth/user`, {
+        headers: authHeader()
+      })
+      .then(res => {
+        if(res.data) {
+          // Get the data from response and console log it
+          // console.log(res.data)
+        }
+        // Send the info to the 'Actions'
+        return res.data
+      })
+  }
+
+  // Add New Drug
+  newDrug(medicine) {
+    return axios.post(`${URL}/drugstore`, {
+      headers: authHeader(),
+      name: medicine.name,
+      category: medicine.category,
+      description: medicine.description,
+      use: medicine.use,
+      imgUrl: medicine.imgUrl
+    })
+  }
 }
 
 export default new DrugstoreService()
